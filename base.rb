@@ -1,13 +1,25 @@
+gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
 if yes?("Do you want to use RSpec for testing?")
   plugin "rspec", :git => "git://github.com/dchelimsky/rspec.git"
   plugin "rspec-rails", :git => "git://github.com/dchelimsky/rspec-rails.git"
   generate :rspec
-end
-if yes?("Do you want to use Shoulda for testing?")
-  gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
-end
 
-gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
+  file "spec/factories.rb", <<EOF
+# Factory.define :user do |f|
+#  f.first_name 'John'
+#  f.last_name  'Doe'
+#end
+EOF
+else
+  gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
+  file "test/factories.rb", <<EOF
+# Factory.define :user do |f|
+#  f.first_name 'John'
+#  f.last_name  'Doe'
+#end
+EOF
+
+end
 
 rake "gems:install"
 
