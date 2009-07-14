@@ -13,6 +13,17 @@ run "touch tmp/.gitignore log/.gitignore vendor/.gitignore"
 run "cp config/database.yml config/example_database.yml"
 
 file ".gitignore", <<-END
+# Tmp files
+*.orig
+*.swp
+
+# Source control files
+.hgignore
+.hg*
+**/*.svn
+.svn
+
+# Rails files
 log/*.log
 tmp/**/*
 config/database.yml
